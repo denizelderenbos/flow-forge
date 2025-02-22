@@ -2,6 +2,29 @@
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-node": "^4.22.0",
-    "@tensorflow/tfjs-node-gpu": "^4.22.0"
-  }
+    "@tensorflow/tfjs-node-gpu": "^4.22.0",
+    "csv": "^6.3.11",
+    "csv-parse": "^5.6.0",
+    "csv-parser": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "name": "tensforflow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx tsc",
+    "greet": "npx ts-node src/index.ts greet \"John Doe\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

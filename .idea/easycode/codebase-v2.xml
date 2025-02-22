@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/my-model/model.json;/Users/deniz/Code/Icarus/tensforflow/src/models/domain/DataRecord.ts;/Users/deniz/Code/Icarus/tensforflow/src/models/domain/Record.ts;/Users/deniz/Code/Icarus/tensforflow/src/services/TrainingService.ts;/Users/deniz/Code/Icarus/tensforflow/src/utils/CsvReader.ts;/Users/deniz/Code/Icarus/tensforflow/src/index.ts;/Users/deniz/Code/Icarus/tensforflow/check.js;/Users/deniz/Code/Icarus/tensforflow/index.js;/Users/deniz/Code/Icarus/tensforflow/minmax.json;/Users/deniz/Code/Icarus/tensforflow/package-lock.json;/Users/deniz/Code/Icarus/tensforflow/package.json;/Users/deniz/Code/Icarus/tensforflow/predict.js;/Users/deniz/Code/Icarus/tensforflow/tsconfig.json" />
+  </component>
+</project>

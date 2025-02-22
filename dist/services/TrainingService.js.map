@@ -1,0 +1,1 @@
+{"version":3,"file":"TrainingService.js","sourceRoot":"","sources":["../../src/services/TrainingService.ts"],"names":[],"mappings":";;AAAA,kDAA6C;AAG7C,gEAA2D;AAE3D,MAAqB,eAAe;IAIhC;QACI,IAAI,CAAC,SAAS,GAAG,IAAI,qBAAS,EAAE,CAAC;QACjC,mDAAmD;QACnD,IAAI,CAAC,YAAY,GAAG,IAAI,+BAAc,EAAE,CAAC;IAC7C,CAAC;CA6BJ;AArCD,kCAqCC"}
