@@ -7,7 +7,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Example: usage: `npx ts-node src/index.ts greet "John Doe"`
 const CsvReader_1 = require("./utils/CsvReader");
 const ModelController_1 = __importDefault(require("./controllers/ModelController"));
-const LabelPredictor_1 = require("./models/ml/LabelPredictor");
 const LabelizerV2_1 = require("./models/ml/LabelizerV2");
 const DataRecord_1 = require("./models/domain/DataRecord");
 async function main() {
@@ -40,9 +39,6 @@ async function main() {
             // Instantiate the correct trainer based on modelClassName
             let trainer;
             switch (modelClassName) {
-                case 'LabelPredictor':
-                    trainer = new LabelPredictor_1.LabelPredictor();
-                    break;
                 case 'LabelizerV2':
                     trainer = new LabelizerV2_1.LabelizerV2();
                     break;
@@ -50,17 +46,21 @@ async function main() {
                     throw new Error(`Unknown model trainer: ${modelClassName}`);
             }
             // Load training data and train the model
+            function toNumber(value) {
+                const converted = parseFloat(value.replace(',', '.'));
+                return Number.isFinite(converted) ? converted : 0;
+            }
             const reader = new CsvReader_1.CsvReader();
-            const data = await reader.read(csvPath, ';');
+            const data = await reader.read(csvPath, ',');
             const trainingData = data.map(({ impressions, clicks, ctr, spend, conversions, conversionValue, roas, label }) => {
                 return new DataRecord_1.DataRecord({
-                    impressions: parseFloat(impressions.replace(',', '.')),
-                    clicks: parseFloat(clicks.replace(',', '.')),
-                    ctr: parseFloat(ctr.replace(',', '.')),
-                    spend: parseFloat(spend.replace(',', '.')),
-                    conversions: parseFloat(conversions.replace(',', '.')),
-                    conversionValue: parseFloat(conversionValue.replace(',', '.')),
-                    roas: parseFloat(roas.replace(',', '.')),
+                    impressions: toNumber(impressions),
+                    clicks: toNumber(clicks),
+                    ctr: toNumber(ctr),
+                    spend: toNumber(spend),
+                    conversions: toNumber(conversions),
+                    conversionValue: toNumber(conversionValue),
+                    roas: toNumber(roas),
                     label
                 });
             });

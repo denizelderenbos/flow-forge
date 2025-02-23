@@ -6,10 +6,9 @@
 import {CsvReader} from "./utils/CsvReader";
 import TrainingController from "./controllers/TrainingController";
 import ModelController from "./controllers/ModelController";
-import {IModelTrainer} from "./models/ml/IModelTrainer";
-import {LabelPredictor} from "./models/ml/LabelPredictor";
-import {LabelizerV2} from "./models/ml/LabelizerV2";
-import {DataRecord} from "./models/domain/DataRecord";
+import router from "./core/Router";
+import PredictionController from "./controllers/PredictionController";
+import CheckController from "./controllers/CheckController";
 
 async function main() {
     const args = process.argv.slice(2);
@@ -28,71 +27,22 @@ async function main() {
             break;
         }
         case 'train': {
-            // Usage:
-            //   npx ts-node src/index.ts train <ModelClassName> <path-to-csv> <model-save-path>
-            // Example:
-            //   npx ts-node src/index.ts train LabelPredictor training-data/data.csv ./src/models/ml/my-trained-model
-            const modelClassName = args[1];
-            if (!modelClassName) {
-                throw new Error("Model class name is required (e.g., 'LabelPredictor' or 'LabelizerV2').");
-            }
-            const csvPath = args[2] || 'training-data/data.csv';
-            const modelName = args[3] || 'my-model';
-            const modelSavePath = `./src/models/ml/${modelName}`;
-
-            // Instantiate the correct trainer based on modelClassName
-            let trainer: IModelTrainer;
-            switch (modelClassName) {
-                case 'LabelPredictor':
-                    trainer = new LabelPredictor();
-                    break;
-                case 'LabelizerV2':
-                    trainer = new LabelizerV2();
-                    break;
-                default:
-                    throw new Error(`Unknown model trainer: ${modelClassName}`);
-            }
-
-            // Load training data and train the model
-            const reader = new CsvReader();
-            const data = await reader.read(csvPath, ';');
-            const trainingData = data.map(({
-                                               impressions,
-                                               clicks,
-                                               ctr,
-                                               spend,
-                                               conversions,
-                                               conversionValue,
-                                               roas,
-                                               label
-                                           }) => {
-                return new DataRecord({
-                    impressions: parseFloat(impressions.replace(',', '.')),
-                    clicks: parseFloat(clicks.replace(',', '.')),
-                    ctr: parseFloat(ctr.replace(',', '.')),
-                    spend: parseFloat(spend.replace(',', '.')),
-                    conversions: parseFloat(conversions.replace(',', '.')),
-                    conversionValue: parseFloat(conversionValue.replace(',', '.')),
-                    roas: parseFloat(roas.replace(',', '.')),
-                    label
-                });
-            });
-
-            await trainer.train(trainingData, modelSavePath);
+            await router.run([TrainingController, "train"]);
             break;
         }
-        case 'createModel': {
-            // Use: npx ts-node src/index.ts createModel <inputShape> <numClasses> <savePath>
-            const inputShape = Number(args[1]) || 7; // default number of features
-            const numClasses = Number(args[2]) || 5;   // default number of classes
-            const modelName = args[3] || 'my-model';
-            const controller = new ModelController();
-            await controller.createAndSaveModel(inputShape, numClasses, modelName);
+        case 'predict': {
+            await router.run([PredictionController, "predict"]);
+            break;
+        }
+        case 'check': {
+            await router.run([CheckController, "check"]);
             break;
         }
         default:
             console.log('Usage:');
             console.log('  npx ts-node src/index.ts greet <name>');
+            console.log("  npx ts-node src/index.ts predict <csvPath> <outputPath> <modelPath> <minmaxPath>");
+            console.log("  npx ts-node src/index.ts check <csvPath>");
             break;
     }
 }

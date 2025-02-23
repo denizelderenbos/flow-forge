@@ -1,16 +1,11 @@
 import {CsvReader} from '../utils/CsvReader';
-import {DataRecord} from '../models/domain/DataRecord';
-import {IModelTrainer} from "../models/ml/IModelTrainer";
-import {LabelPredictor} from "../models/ml/LabelPredictor";
 
 export default class TrainingService {
     private csvReader: CsvReader;
-    private modelTrainer: IModelTrainer;
 
     constructor() {
         this.csvReader = new CsvReader();
         // Use LabelPredictor as the concrete model trainer
-        this.modelTrainer = new LabelPredictor();
     }
 
     // /**
