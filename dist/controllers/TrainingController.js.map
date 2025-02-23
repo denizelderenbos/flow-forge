@@ -1,1 +1,0 @@
-{"version":3,"file":"TrainingController.js","sourceRoot":"","sources":["../../src/controllers/TrainingController.ts"],"names":[],"mappings":";;;;;AAAA,kFAA0D;AAE1D,MAAqB,kBAAkB;IAGnC;QACI,IAAI,CAAC,eAAe,GAAG,IAAI,yBAAe,EAAE,CAAC;IACjD,CAAC;IAED;;;;;OAKG;IACI,KAAK,CAAC,KAAK,CAAC,OAAe,EAAE,aAAqB;QACrD,iEAAiE;IACrE,CAAC;CACJ;AAhBD,qCAgBC"}
